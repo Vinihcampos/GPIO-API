@@ -1,0 +1,1 @@
+g++ -std=c++11 -Wall "src/check_cpu.cpp" -o "bin/check_cpu" -O3
