@@ -18,6 +18,23 @@
 class GPIOSystem {
 
 	public:
+		
+		/*!
+		 * \brief Direction of the communication in the I/O port.
+		 * */
+		enum class Direction {
+			OUT = 0,
+			IN	= 1
+		};
+
+		/*!
+		 * \brief Values that a port can assume.
+		 * */
+		enum class Value {
+			LOW		= 0,
+			HIGH	= 1
+		};
+		
 		/*!< Maps pin numbers into gpio folder names, default based on BeagleBone SRM. */
 		static std::map<std::string, std::string> pinToIO;
 
