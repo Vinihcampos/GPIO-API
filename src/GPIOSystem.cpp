@@ -67,3 +67,5 @@ std::map<std::string, std::string> GPIOSystem::pinToIO = {
 	{"P8_46", "gpio71"}
 };
 
+std::string GPIOSystem::sysgpiopath = "/sys/class/gpio/";
+
