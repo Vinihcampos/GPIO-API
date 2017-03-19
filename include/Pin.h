@@ -17,6 +17,21 @@ class Pin {
 		/*!< Pin name, generally in the form P[8,9]_[0-9][0-9][0-9]. */
 		std::string name;	
 
+		/*!
+		 * \brief Export the pin to a valid gpio folder.
+		 * 
+		 * Effectively, creates a folder with the direction, value
+		 * and other informations about the pin, allowing its manipulation.
+		 * In this implementation, this action cannot be called by itself,
+		 * but is always invoked when a Pin object is created.
+		 * */
+		void exportPin() const;
+
+		/*!
+		 * \brief Unexport pin, called in the destructor.
+		 * */
+		void unexportPin() const;
+
 	public:
 
 		/*!
@@ -27,6 +42,11 @@ class Pin {
 		 * \param value			Pin's value.
 		 * */
 		Pin(std::string, GPIOSystem::Direction, GPIOSystem::Value);
+
+		/*!
+		 * \brief Destructor.
+		 * */
+		~Pin();
 
 		/*! 
 		 * \brief Get pin's name.
@@ -47,7 +67,7 @@ class Pin {
 		 * 
 		 * \return Current pin's direction.
 		 * */
-		GPIOSystem::Value getDirection() const;
+		GPIOSystem::Direction getDirection() const;
 
 		/*!
 		 * \brief Set pin's value.
@@ -61,7 +81,7 @@ class Pin {
 		 * 
 		 * \return Current pin's value.
 		 * */
-		GPIOSystem::Direction getValue() const;
+		GPIOSystem::Value getValue() const;
 
 };
 

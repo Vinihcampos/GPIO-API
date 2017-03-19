@@ -38,5 +38,7 @@ class GPIOSystem {
 		/*!< Maps pin numbers into gpio folder names, default based on BeagleBone SRM. */
 		static std::map<std::string, std::string> pinToIO;
 
+		static std::string sysgpiopath;
+
 };
 #endif
