@@ -24,20 +24,21 @@ class GPIOSystem {
 		 * */
 		enum class Direction {
 			OUT = 0,
-			IN	= 1
+			IN = 1
 		};
 
 		/*!
 		 * \brief Values that a port can assume.
 		 * */
 		enum class Value {
-			LOW		= 0,
-			HIGH	= 1
+			LOW	= 0,
+			HIGH = 1
 		};
 		
 		/*!< Maps pin numbers into gpio folder names, default based on BeagleBone SRM. */
 		static std::map<std::string, std::string> pinToIO;
 
+		/*!< Path containing pin folders, default is /sys/class/gpio/ */
 		static std::string sysgpiopath;
 
 };
