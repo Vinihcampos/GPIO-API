@@ -71,7 +71,7 @@ int check_cpu_usage(int sleep_time){
 
 }
 
-int main(int argn, char * argv[]){
+/*int main(int argn, char * argv[]){
 	
 	int sleep_time = 1000;
 
@@ -85,4 +85,4 @@ int main(int argn, char * argv[]){
 	}
 
 	return 0;
-}
+}*/

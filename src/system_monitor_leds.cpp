@@ -1,5 +1,6 @@
 #include "Pin.h"
 #include <unistd.h>
+#include "check_cpu.cpp"
 
 int main(int argn, char * args[]) {
 
@@ -12,7 +13,7 @@ int main(int argn, char * args[]) {
 	// Main loop
 	unsigned int interval_update = atoi(args[1]) * 1000; 	/*!< Update at each 'interval_update' ms */
 	while (true) {
-		double usage_percentage; // TODO: update CPU percentage
+		double usage_percentage = check_cpu_usage(interval_update/1000);
 
 		if (usage_percentage <= 25) {
 			// Green LED
@@ -32,10 +33,10 @@ int main(int argn, char * args[]) {
 		} else {
 			while (usage_percentage >= 75) {
 				// Kill the most expensive by button pressing
-				if (button.getValue() == GPIOSystem::Value::HIGH) {
+				if (kill_button.getValue() == GPIOSystem::Value::HIGH) {
 					pid_t expensive_process; // TODO: Return the PID of most expensive
-					system("kill -9 " + pid_t);
-					usage_percentage = 74; // TODO: Get percentage
+					system("kill -9 " + expensive_process);
+					usage_percentage = check_cpu_usage(interval_update/1000); 
 					if (usage_percentage < 75) {
 						green_led.setValue(GPIOSystem::Value::LOW);
 						yellow_led.setValue(GPIOSystem::Value::LOW);
@@ -51,7 +52,7 @@ int main(int argn, char * args[]) {
 				green_led.setValue(GPIOSystem::Value::LOW);
 				yellow_led.setValue(GPIOSystem::Value::LOW);
 				red_led.setValue(GPIOSystem::Value::LOW);
-				usage_percentage = 75;// TODO: update usage_percentage
+				usage_percentage = check_cpu_usage(interval_update/1000);
 			}
 		}
 

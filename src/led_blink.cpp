@@ -3,7 +3,7 @@
 
 int main(void) {
 
-	Pin redled {"P9_14", GPIOSystem::Direction::OUT, GPIOSystem::Value::LOW};
+	Pin redled {"P9_16", GPIOSystem::Direction::OUT, GPIOSystem::Value::LOW};
 	Pin button {"P9_27", GPIOSystem::Direction::IN, GPIOSystem::Value::LOW};
 
 	while (true) {
