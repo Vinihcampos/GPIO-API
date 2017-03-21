@@ -226,7 +226,7 @@ std::string check_process_usage(int sleep_time){
     return proc_use.empty() ? "-1" : proc_use.front().cpu;
 }
 
-int main(int argn, char * argv[]){
+/*int main(int argn, char * argv[]){
 	
 	int sleep_time = 1000;
 
@@ -241,4 +241,4 @@ int main(int argn, char * argv[]){
 	}
 
 	return 0;
-}
+}*/
