@@ -91,7 +91,6 @@ std::string check_process_usage(int sleep_time){
     std::stringstream ss;
 
     int uptime;
-    long hertz;
     std::string input;
 
     std::ifstream uptime_file("/proc/uptime", std::ifstream::in);
@@ -102,8 +101,6 @@ std::string check_process_usage(int sleep_time){
     ss.clear();
 
     uptime_file.close();
-    
-    hertz = sysconf(_SC_CLK_TCK);
 
     for (boost::filesystem::directory_iterator itr(p); itr != end_itr; ++itr) {
     	if( boost::filesystem::is_directory( itr->path() ) && is_number(itr->path().leaf().string()) ){
@@ -162,7 +159,7 @@ std::string check_process_usage(int sleep_time){
     std::pair<int,int> totaltime;
     check_cpu_usage(sleep_time, totaltime);
 
-    for(int i = 0; i < proc_use.size(); ++i){
+    for(unsigned long i = 0; i < proc_use.size(); ++i){
 
     	if( boost::filesystem::exists( "/proc/" + proc_use[i].cpu ) ){
 
@@ -217,11 +214,6 @@ std::string check_process_usage(int sleep_time){
     }
 
     sort(proc_use.begin(), proc_use.end(), comp);
-
-    for(int i = 0; i < 5 && i < proc_use.size(); ++i){
-    	std::cout <<"PID: " << proc_use[i].cpu << " " << proc_use[i].total << std::endl;
-    }
-    std::cout << "-------------------\n";
 
     return proc_use.empty() ? "-1" : proc_use.front().cpu;
 }

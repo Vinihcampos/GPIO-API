@@ -39,7 +39,7 @@ int main(int argn, char * args[]) {
 				// Kill the most expensive by button pressing
 				if (kill_button.getValue() == GPIOSystem::Value::HIGH) {
 					std::string kill_command = "kill -9 " + check_process_usage(interval_update/1000);
-					system(kill_command.c_str());
+					int s = system(kill_command.c_str());
 					usage_percentage = check_cpu_usage(interval_update/1000, totaltime); 
 					if (usage_percentage < 75) {
 						green_led.setValue(GPIOSystem::Value::LOW);
@@ -52,11 +52,11 @@ int main(int argn, char * args[]) {
 				green_led.setValue(GPIOSystem::Value::HIGH);
 				yellow_led.setValue(GPIOSystem::Value::HIGH);
 				red_led.setValue(GPIOSystem::Value::HIGH);
-				usleep(interval_update/4); 
+				usleep(10000); 
 				green_led.setValue(GPIOSystem::Value::LOW);
 				yellow_led.setValue(GPIOSystem::Value::LOW);
 				red_led.setValue(GPIOSystem::Value::LOW);
-				usage_percentage = check_cpu_usage(interval_update/1000, totaltime);
+				usage_percentage = check_cpu_usage(100, totaltime);
 			}
 		}
 

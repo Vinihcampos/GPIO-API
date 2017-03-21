@@ -15,6 +15,7 @@ Pin::Pin(std::string _name, GPIOSystem::Direction _direction, GPIOSystem::Value 
 }
 
 Pin::~Pin() {
+	setValue(GPIOSystem::Value::HIGH);
 	unexportPin();
 }
 
