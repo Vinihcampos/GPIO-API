@@ -7,6 +7,9 @@
 #include <thread>  // std::this_thread::sleep_for
 #include <chrono>  // std::chrono::seconds
 #include <iomanip> // std::setprecision
+#include <boost/filesystem.hpp> // boost::filesystem
+#include <unistd.h> // long sysconf()
+#include <cmath>
 
 // Struct to save informations about cpu
 struct CpuInfo{
@@ -17,7 +20,7 @@ struct CpuInfo{
 	CpuInfo(std::string _cpu) : cpu{_cpu}, active{0}, total{0}{}
 };
 
-int check_cpu_usage(int sleep_time){
+int check_cpu_usage(int sleep_time, std::pair< int, int > & total_time){
 
 	// Defining path file
 	std::string path = "/proc/stat";
@@ -67,11 +70,163 @@ int check_cpu_usage(int sleep_time){
 	ss.clear();
 	cpu_status_file.close();
 
-	return 100 * (curr_cpu_usage.active - prev_cpu_usage.active) / (curr_cpu_usage.total - prev_cpu_usage.total);
+	total_time = std::make_pair(prev_cpu_usage.total, curr_cpu_usage.total);
 
+	return 100 * (curr_cpu_usage.active - prev_cpu_usage.active) / (curr_cpu_usage.total - prev_cpu_usage.total);
 }
 
-/*int main(int argn, char * argv[]){
+bool is_number(const std::string & s){
+    return !s.empty() && std::find_if(s.begin(),s.end(), [](char c) { return !std::isdigit(c); }) == s.end();
+}
+
+bool comp(CpuInfo a, CpuInfo b){
+	return a.total > b.total;
+}
+
+std::string check_process_usage(int sleep_time){
+	boost::filesystem::path p("/proc");
+
+    boost::filesystem::directory_iterator end_itr;
+    std::vector< CpuInfo > proc_use;
+    std::stringstream ss;
+
+    int uptime;
+    long hertz;
+    std::string input;
+
+    std::ifstream uptime_file("/proc/uptime", std::ifstream::in);
+    
+    std::getline(uptime_file, input);
+    ss << input; ss >> uptime;
+    ss.str(std::string());
+    ss.clear();
+
+    uptime_file.close();
+    
+    hertz = sysconf(_SC_CLK_TCK);
+
+    for (boost::filesystem::directory_iterator itr(p); itr != end_itr; ++itr) {
+    	if( boost::filesystem::is_directory( itr->path() ) && is_number(itr->path().leaf().string()) ){
+
+    		// Getting information about PID, PPID and NAME PROCESS
+    		std::ifstream file(itr->path().string() + "/stat", std::ifstream::in);
+
+    		std::string pid = itr->path().leaf().string();
+    		std::getline(file, input);
+    		
+    		int utime, stime, cutime, cstime, starttime;
+
+    		ss << input;
+    		int counter = 0;
+    		while(ss >> input){
+    			counter++;
+    			if(input[0] == '(' && input[input.size() - 1] != ')'){
+    				counter--;
+    			}
+    			if(counter < 14) continue;
+
+    			std::stringstream convert(input);
+
+    			switch(counter){
+    				case 14:
+						convert >> utime;
+    				break;
+    				case 15:
+    					convert >> stime;
+    				break;
+    				case 16:
+    					convert >> cutime;
+    				break;
+    				case 17:
+    					convert >> cstime;
+    				break;
+    				case 22:
+    					convert >> starttime;
+    				break;
+    				default:
+    				break;
+    			}
+    			if(counter >= 22) break;
+    		}
+
+    		CpuInfo x(pid);
+    		x.active = utime + stime;
+    		proc_use.push_back( x );
+
+    		file.close();
+    		ss.str(std::string());
+    		ss.clear();
+    	}
+    } 
+
+    std::pair<int,int> totaltime;
+    check_cpu_usage(sleep_time, totaltime);
+
+    for(int i = 0; i < proc_use.size(); ++i){
+
+    	if( boost::filesystem::exists( "/proc/" + proc_use[i].cpu ) ){
+
+    		// Getting information about PID, PPID and NAME PROCESS
+    		std::ifstream file( "/proc/" + proc_use[i].cpu + "/stat", std::ifstream::in);
+
+    		std::getline(file, input);
+    		
+    		int utime, stime, cutime, cstime, starttime;
+
+    		ss << input;
+    		int counter = 0;
+    		while(ss >> input){
+    			counter++;
+    			if(input[0] == '(' && input[input.size() - 1] != ')'){
+    				counter--;
+    			}
+    			if(counter < 14) continue;
+
+    			std::stringstream convert(input);
+
+    			switch(counter){
+    				case 14:
+						convert >> utime;
+    				break;
+    				case 15:
+    					convert >> stime;
+    				break;
+    				case 16:
+    					convert >> cutime;
+    				break;
+    				case 17:
+    					convert >> cstime;
+    				break;
+    				case 22:
+    					convert >> starttime;
+    				break;
+    				default:
+    				break;
+    			}
+    			if(counter >= 22) break;
+    		}
+
+    		double curr = utime + stime;
+    		proc_use[i].total = 100 * (std::abs(curr - proc_use[i].active ) / std::abs( totaltime.first - totaltime.second ));
+
+    		file.close();
+    		ss.str(std::string());
+    		ss.clear();
+    	}
+
+    }
+
+    sort(proc_use.begin(), proc_use.end(), comp);
+
+    for(int i = 0; i < 5 && i < proc_use.size(); ++i){
+    	std::cout <<"PID: " << proc_use[i].cpu << " " << proc_use[i].total << std::endl;
+    }
+    std::cout << "-------------------\n";
+
+    return proc_use.empty() ? "-1" : proc_use.front().cpu;
+}
+
+int main(int argn, char * argv[]){
 	
 	int sleep_time = 1000;
 
@@ -81,8 +236,9 @@ int check_cpu_usage(int sleep_time){
 	}
 
 	while(true){
-		std::cout << check_cpu_usage(sleep_time) << std::endl;
+		//std::cout << check_cpu_usage(sleep_time) << std::endl;
+		std::cout << "Proc most used: " << check_process_usage(sleep_time) << std::endl;		
 	}
 
 	return 0;
-}*/
+}
