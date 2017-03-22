@@ -25,12 +25,12 @@ class Pin {
 		 * In this implementation, this action cannot be called by itself,
 		 * but is always invoked when a Pin object is created.
 		 * */
-		void exportPin() const;
+		void doExport() const;
 
 		/*!
 		 * \brief Unexport pin, called in the destructor.
 		 * */
-		void unexportPin() const;
+		void unexport() const;
 
 	public:
 

@@ -7,7 +7,7 @@ Pin::Pin(std::string _name, GPIOSystem::Direction _direction, GPIOSystem::Value 
 	if (GPIOSystem::pinToIO.find(_name) == GPIOSystem::pinToIO.end())
 		throw std::invalid_argument("PIN name not registered!");
 	// Creates the folder
-	exportPin();
+	doExport();
 	// Set initial direction
 	setDirection(_direction);
 	// Set initial value
@@ -16,10 +16,10 @@ Pin::Pin(std::string _name, GPIOSystem::Direction _direction, GPIOSystem::Value 
 
 Pin::~Pin() {
 	setValue(GPIOSystem::Value::HIGH);
-	unexportPin();
+	unexport();
 }
 
-void Pin::exportPin() const {
+void Pin::doExport() const {
 	std::string path = GPIOSystem::sysgpiopath + "/export";
 	std::ofstream ofs {path};
 	if (ofs.is_open()) {
@@ -27,7 +27,7 @@ void Pin::exportPin() const {
 	} else throw std::logic_error("Unable to export pin.");
 }
 
-void Pin::unexportPin() const {
+void Pin::unexport() const {
 	std::string path = GPIOSystem::sysgpiopath + "/unexport";
 	std::ofstream ofs {path};
 	if (ofs.is_open()) {
