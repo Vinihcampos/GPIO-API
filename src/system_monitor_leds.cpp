@@ -1,14 +1,24 @@
+#include <csignal>
 #include "Pin.h"
 #include <unistd.h>
 #include "check_cpu.cpp"
 
+// Initialize pins
+Pin green_led 		{"P9_16", GPIOSystem::Direction::OUT, GPIOSystem::Value::LOW};
+Pin yellow_led 		{"P9_14", GPIOSystem::Direction::OUT, GPIOSystem::Value::LOW};
+Pin red_led 		{"P9_12", GPIOSystem::Direction::OUT, GPIOSystem::Value::LOW};
+Pin kill_button 	{"P9_27", GPIOSystem::Direction::IN, GPIOSystem::Value::LOW};
+
+void interruptHandler(int signal) {
+	green_led.setValue(GPIOSystem::Value::LOW);
+	yellow_led.setValue(GPIOSystem::Value::LOW);
+	red_led.setValue(GPIOSystem::Value::LOW);
+}
+
 int main(int argn, char * args[]) {
 
-	// Initialize pins
-	Pin green_led 		{"P9_16", GPIOSystem::Direction::OUT, GPIOSystem::Value::LOW};
-	Pin yellow_led 		{"P9_14", GPIOSystem::Direction::OUT, GPIOSystem::Value::LOW};
-	Pin red_led 		{"P9_12", GPIOSystem::Direction::OUT, GPIOSystem::Value::LOW};
-	Pin kill_button 	{"P9_27", GPIOSystem::Direction::IN, GPIOSystem::Value::LOW};
+	// Configure to turn all leds off when interrupted by terminal
+	signal(SIGINT, interruptHandler);
 
 	// Main loop
 	unsigned int interval_update = atoi(args[1]) * 1000; 	/*!< Update at each 'interval_update' ms */
