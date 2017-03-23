@@ -1,5 +1,7 @@
-#include "Pin.h"
+#include <csignal>
 #include <unistd.h>
+#include <cstdio>
+#include "Pin.h"
 #include "check_cpu.cpp"
 
 Pin green_led; 	
@@ -7,7 +9,17 @@ Pin yellow_led;
 Pin red_led;	
 Pin kill_button; 
 
+void interruptHandler(int sig) {
+	green_led.setValue(GPIOSystem::Value::LOW);
+	yellow_led.setValue(GPIOSystem::Value::LOW);
+	red_led.setValue(GPIOSystem::Value::LOW);
+	exit(0);
+}
+
 int main(int argn, char * args[]) {
+
+	// Configure to turn all leds off when interrupted by terminal
+	signal(SIGINT, interruptHandler);
 
 	// Initialize pins
 	green_led.setName("P9_16"); 
