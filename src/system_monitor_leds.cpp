@@ -1,5 +1,6 @@
 #include "Pin.h"
 #include <unistd.h>
+#include <signal.h>
 #include "check_cpu.cpp"
 
 Pin green_led; 	
@@ -54,8 +55,8 @@ int main(int argn, char * args[]) {
 			while (usage_percentage >= 75) {
 				// Kill the most expensive by button pressing
 				if (kill_button.getValue() == GPIOSystem::Value::HIGH) {
-					std::string kill_command = "kill -9 " + check_process_usage(interval_update/1000);
-					int s = system(kill_command.c_str());
+					pid_t kill_pid = stoi(check_process_usage(interval_update/1000));
+					kill(kill_pid, SIGQUIT);
 					usage_percentage = check_cpu_usage(interval_update/1000, totaltime); 
 					if (usage_percentage < 75) {
 						green_led.setValue(GPIOSystem::Value::LOW);
@@ -68,11 +69,11 @@ int main(int argn, char * args[]) {
 				green_led.setValue(GPIOSystem::Value::HIGH);
 				yellow_led.setValue(GPIOSystem::Value::HIGH);
 				red_led.setValue(GPIOSystem::Value::HIGH);
-				usleep(10000); 
+				usleep(100000); 
 				green_led.setValue(GPIOSystem::Value::LOW);
 				yellow_led.setValue(GPIOSystem::Value::LOW);
 				red_led.setValue(GPIOSystem::Value::LOW);
-				usage_percentage = check_cpu_usage(100, totaltime);
+				usage_percentage = check_cpu_usage(500, totaltime);
 			}
 		}
 
