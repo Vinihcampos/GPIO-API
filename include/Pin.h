@@ -15,7 +15,7 @@ class Pin {
 	private:
 
 		/*!< Pin name, generally in the form P[8,9]_[0-9][0-9][0-9]. */
-		std::string name;	
+		std::string name = "";	
 
 		/*!
 		 * \brief Export the pin to a valid gpio folder.
@@ -34,6 +34,9 @@ class Pin {
 
 	public:
 
+		/*! \brief Simplest constructor. */
+		Pin();
+
 		/*!
 		 * \brief Constructor.
 		 * 
@@ -47,6 +50,9 @@ class Pin {
 		 * \brief Destructor.
 		 * */
 		~Pin();
+
+		/*! \brief Set name method. */
+		void setName(std::string _name);
 
 		/*! 
 		 * \brief Get pin's name.

@@ -1,24 +1,42 @@
 #include <csignal>
-#include "Pin.h"
 #include <unistd.h>
+#include <cstdio>
+#include "Pin.h"
 #include "check_cpu.cpp"
 
-// Initialize pins
-Pin green_led 		{"P9_16", GPIOSystem::Direction::OUT, GPIOSystem::Value::LOW};
-Pin yellow_led 		{"P9_14", GPIOSystem::Direction::OUT, GPIOSystem::Value::LOW};
-Pin red_led 		{"P9_12", GPIOSystem::Direction::OUT, GPIOSystem::Value::LOW};
-Pin kill_button 	{"P9_27", GPIOSystem::Direction::IN, GPIOSystem::Value::LOW};
+Pin green_led; 	
+Pin yellow_led; 	
+Pin red_led;	
+Pin kill_button; 
 
-void interruptHandler(int signal) {
+void interruptHandler(int sig) {
 	green_led.setValue(GPIOSystem::Value::LOW);
 	yellow_led.setValue(GPIOSystem::Value::LOW);
 	red_led.setValue(GPIOSystem::Value::LOW);
+	exit(0);
 }
 
 int main(int argn, char * args[]) {
 
 	// Configure to turn all leds off when interrupted by terminal
 	signal(SIGINT, interruptHandler);
+
+	// Initialize pins
+	green_led.setName("P9_16"); 
+	green_led.setDirection(GPIOSystem::Direction::OUT); 
+	green_led.setValue(GPIOSystem::Value::LOW);
+
+	yellow_led.setName("P9_14");
+	yellow_led.setDirection(GPIOSystem::Direction::OUT); 
+	yellow_led.setValue(GPIOSystem::Value::LOW);
+
+	red_led.setName("P9_12"); 
+	red_led.setDirection(GPIOSystem::Direction::OUT); 
+	red_led.setValue(GPIOSystem::Value::LOW);
+
+	kill_button.setName("P9_27");
+	kill_button.setDirection(GPIOSystem::Direction::IN); 
+	kill_button.setValue(GPIOSystem::Value::LOW);
 
 	// Main loop
 	unsigned int interval_update = atoi(args[1]) * 1000; 	/*!< Update at each 'interval_update' ms */

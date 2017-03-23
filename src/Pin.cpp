@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 
+Pin::Pin() {}
+
 Pin::Pin(std::string _name, GPIOSystem::Direction _direction, GPIOSystem::Value _value) : name{_name} {
 	// Check if this pin is defined
 	if (GPIOSystem::pinToIO.find(_name) == GPIOSystem::pinToIO.end())
@@ -37,6 +39,16 @@ void Pin::unexport() const {
 
 std::string Pin::getName() const {
 	return name;
+}
+
+void Pin::setName(std::string _name) {
+	// Check if this pin is defined
+	if (GPIOSystem::pinToIO.find(_name) == GPIOSystem::pinToIO.end())
+		throw std::invalid_argument("PIN name not registered!");
+	// Set attribute
+	this->name = _name;
+	// Creates the folder
+	doExport();
 }
 
 void Pin::setDirection(GPIOSystem::Direction _direction) {
