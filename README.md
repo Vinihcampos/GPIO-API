@@ -5,7 +5,7 @@ This is an API to control Beaglebone's GPIO and an application to exemplify the 
 
 ## Installation
 
-To use this application is needed install <b>Boost Filesystem Library</b>: 
+Using this application requires <b>Boost Filesystem Library</b>: 
 
 <b>Debian Based</b>: `sudo apt-get install libboost-all-dev`
 
