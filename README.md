@@ -17,7 +17,8 @@ Check <a href="http://viniciuscampos.me/GPIO-API/documentation/html/index.html" 
 
 ## Example
 
-```#include <iostream>
+```cpp
+#include <iostream>
 #include "GPIOSystem.h"
 #include "Pin.h"
 
@@ -29,7 +30,7 @@ int main(void) {
 
 ## Team
 
-| [![Vinicius Campos](https://avatars.githubusercontent.com/Vinihcampos?s=100)](https://github.com/Vinihcampos) | [![Vitor Rodrigues Greati](https://avatarhttp://greati.github.io/GPIO-API/documentation/html/index.htmls.githubusercontent.com/greati?s=100)](http://greati.github.io)
+| [![Vinicius Campos](https://avatars.githubusercontent.com/Vinihcampos?s=100)](https://github.com/Vinihcampos) | [![Vitor Rodrigues Greati](https://avatars.githubusercontent.com/greati?s=100)](http://greati.github.io)
 ---|---
 [Vinícius Campos](https://github.com/Vinihcampos) | [Vitor Greati](http://greati.github.io)
 
