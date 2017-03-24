@@ -1,0 +1,73 @@
+\hypertarget{classGPIOSystem}{\section{G\-P\-I\-O\-System Class Reference}
+\label{classGPIOSystem}\index{G\-P\-I\-O\-System@{G\-P\-I\-O\-System}}
+}
+
+
+Configurations of G\-P\-I\-O System based on Sys\-F\-S.  
+
+
+
+
+{\ttfamily \#include $<$G\-P\-I\-O\-System.\-h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classGPIOSystem_1_1__init}{\-\_\-init}
+\begin{DoxyCompactList}\small\item\em Intern class for initializing static members. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classGPIOSystem_ab7ef139a50e1e552a75578b539c7c34d}{Direction} \{ {\bfseries O\-U\-T} = 0, 
+{\bfseries I\-N} = 1
+ \}
+\begin{DoxyCompactList}\small\item\em Direction of the communication in the I/\-O port. \end{DoxyCompactList}\item 
+enum \hyperlink{classGPIOSystem_ace7a93165949f378a8ab04f8809e52f1}{Value} \{ {\bfseries L\-O\-W} = 0, 
+{\bfseries H\-I\-G\-H} = 1
+ \}
+\begin{DoxyCompactList}\small\item\em Values that a port can assume. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\-::map$<$ std\-::string, \\*
+std\-::string $>$ \hyperlink{classGPIOSystem_ad94aecb41bf4030d30402bd425eaa16a}{pin\-To\-I\-O}
+\item 
+\hypertarget{classGPIOSystem_a97966b506b11bb23406e33a996ac09bb}{static std\-::string {\bfseries sysgpiopath}}\label{classGPIOSystem_a97966b506b11bb23406e33a996ac09bb}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classGPIOSystem_1_1__init}{\-\_\-init} \hyperlink{classGPIOSystem_a4d67c476f8cd6c907c19e1f1e5db3936}{init}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Configurations of G\-P\-I\-O System based on Sys\-F\-S. 
+
+Contains a map from pins to gpio folders and any other configurations related to the filesystem of the Beaglebone Black being used.
+
+\begin{DoxyAuthor}{Author}
+Vitor Greati, Vinicius Campos 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2017-\/03-\/18 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\-0 
+\end{DoxyVersion}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classGPIOSystem_a4d67c476f8cd6c907c19e1f1e5db3936}{\index{G\-P\-I\-O\-System@{G\-P\-I\-O\-System}!init@{init}}
+\index{init@{init}!GPIOSystem@{G\-P\-I\-O\-System}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf G\-P\-I\-O\-System\-::\-\_\-init} G\-P\-I\-O\-System\-::init\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{classGPIOSystem_a4d67c476f8cd6c907c19e1f1e5db3936}
+$<$ Create \hyperlink{classGPIOSystem_1_1__init}{\-\_\-init} object to initialize static attributes. \hypertarget{classGPIOSystem_ad94aecb41bf4030d30402bd425eaa16a}{\index{G\-P\-I\-O\-System@{G\-P\-I\-O\-System}!pin\-To\-I\-O@{pin\-To\-I\-O}}
+\index{pin\-To\-I\-O@{pin\-To\-I\-O}!GPIOSystem@{G\-P\-I\-O\-System}}
+\subsubsection[{pin\-To\-I\-O}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$ std\-::string, std\-::string $>$ G\-P\-I\-O\-System\-::pin\-To\-I\-O\hspace{0.3cm}{\ttfamily [static]}}}\label{classGPIOSystem_ad94aecb41bf4030d30402bd425eaa16a}
+Path containing pin folders, default is /sys/class/gpio/ 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/G\-P\-I\-O\-System.\-h\item 
+src/G\-P\-I\-O\-System.\-cpp\end{DoxyCompactItemize}

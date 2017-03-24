@@ -1,0 +1,188 @@
+\hypertarget{classPin}{\section{Pin Class Reference}
+\label{classPin}\index{Pin@{Pin}}
+}
+
+
+Represents and allows manipulation of a pin.  
+
+
+
+
+{\ttfamily \#include $<$Pin.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classPin_aaf3d92065cd9b9de91f01164bec418ea}{\hyperlink{classPin_aaf3d92065cd9b9de91f01164bec418ea}{Pin} ()}\label{classPin_aaf3d92065cd9b9de91f01164bec418ea}
+
+\begin{DoxyCompactList}\small\item\em Simplest constructor. \end{DoxyCompactList}\item 
+\hyperlink{classPin_ab8887a4248942998f241c0ea4f169aaf}{Pin} (std\-::string, \hyperlink{classGPIOSystem_ab7ef139a50e1e552a75578b539c7c34d}{G\-P\-I\-O\-System\-::\-Direction}, \hyperlink{classGPIOSystem_ace7a93165949f378a8ab04f8809e52f1}{G\-P\-I\-O\-System\-::\-Value})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hypertarget{classPin_a462c14c45d3d653731dde638aa6e7bb7}{\hyperlink{classPin_a462c14c45d3d653731dde638aa6e7bb7}{$\sim$\-Pin} ()}\label{classPin_a462c14c45d3d653731dde638aa6e7bb7}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\hypertarget{classPin_a60899369709cdfb62661f2c1efde46b8}{void \hyperlink{classPin_a60899369709cdfb62661f2c1efde46b8}{set\-Name} (std\-::string \-\_\-name)}\label{classPin_a60899369709cdfb62661f2c1efde46b8}
+
+\begin{DoxyCompactList}\small\item\em Set name method. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{classPin_ad34ebe31aed9ca042513d17e4dfadb1a}{get\-Name} () const 
+\begin{DoxyCompactList}\small\item\em Get pin's name. \end{DoxyCompactList}\item 
+void \hyperlink{classPin_a4f2fe29e37c959fa7ec90e395bb73230}{set\-Direction} (\hyperlink{classGPIOSystem_ab7ef139a50e1e552a75578b539c7c34d}{G\-P\-I\-O\-System\-::\-Direction} \-\_\-direction)
+\begin{DoxyCompactList}\small\item\em Set pin's direction. \end{DoxyCompactList}\item 
+\hyperlink{classGPIOSystem_ab7ef139a50e1e552a75578b539c7c34d}{G\-P\-I\-O\-System\-::\-Direction} \hyperlink{classPin_a8ae78028468fec12087c77bee35afe86}{get\-Direction} () const 
+\begin{DoxyCompactList}\small\item\em Get pin's direction. \end{DoxyCompactList}\item 
+void \hyperlink{classPin_ab8cea89b887392e27a7964e382fffcc5}{set\-Value} (\hyperlink{classGPIOSystem_ace7a93165949f378a8ab04f8809e52f1}{G\-P\-I\-O\-System\-::\-Value} \-\_\-value)
+\begin{DoxyCompactList}\small\item\em Set pin's value. \end{DoxyCompactList}\item 
+\hyperlink{classGPIOSystem_ace7a93165949f378a8ab04f8809e52f1}{G\-P\-I\-O\-System\-::\-Value} \hyperlink{classPin_ab8584a7f0107f7b7a525a12074d8fbff}{get\-Value} () const 
+\begin{DoxyCompactList}\small\item\em Get pin's value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classPin_ac49d24a8fac749976505da22d2a96138}{do\-Export} () const 
+\begin{DoxyCompactList}\small\item\em Export the pin to a valid gpio folder. \end{DoxyCompactList}\item 
+\hypertarget{classPin_aba1b46166fe84fbcb5c72a4efbb1e078}{void \hyperlink{classPin_aba1b46166fe84fbcb5c72a4efbb1e078}{unexport} () const }\label{classPin_aba1b46166fe84fbcb5c72a4efbb1e078}
+
+\begin{DoxyCompactList}\small\item\em Unexport pin, called in the destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::string \hyperlink{classPin_ad940005d3eda19065f03f1deb6b469d1}{name} = \char`\"{}\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents and allows manipulation of a pin. 
+
+\begin{DoxyAuthor}{Author}
+Vitor Greati, Vinicius Campos 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2017-\/03-\/18 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\-0 
+\end{DoxyVersion}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classPin_ab8887a4248942998f241c0ea4f169aaf}{\index{Pin@{Pin}!Pin@{Pin}}
+\index{Pin@{Pin}!Pin@{Pin}}
+\subsubsection[{Pin}]{\setlength{\rightskip}{0pt plus 5cm}Pin\-::\-Pin (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{\-\_\-name, }
+\item[{{\bf G\-P\-I\-O\-System\-::\-Direction}}]{\-\_\-direction, }
+\item[{{\bf G\-P\-I\-O\-System\-::\-Value}}]{\-\_\-value}
+\end{DoxyParamCaption}
+)}}\label{classPin_ab8887a4248942998f241c0ea4f169aaf}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & \hyperlink{classPin}{Pin}'s name. \\
+\hline
+{\em direction} & \hyperlink{classPin}{Pin}'s direction. \\
+\hline
+{\em value} & \hyperlink{classPin}{Pin}'s value. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classPin_ac49d24a8fac749976505da22d2a96138}{\index{Pin@{Pin}!do\-Export@{do\-Export}}
+\index{do\-Export@{do\-Export}!Pin@{Pin}}
+\subsubsection[{do\-Export}]{\setlength{\rightskip}{0pt plus 5cm}void Pin\-::do\-Export (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}}\label{classPin_ac49d24a8fac749976505da22d2a96138}
+
+
+Export the pin to a valid gpio folder. 
+
+Effectively, creates a folder with the direction, value and other informations about the pin, allowing its manipulation. In this implementation, this action cannot be called by itself, but is always invoked when a \hyperlink{classPin}{Pin} object is created. \hypertarget{classPin_a8ae78028468fec12087c77bee35afe86}{\index{Pin@{Pin}!get\-Direction@{get\-Direction}}
+\index{get\-Direction@{get\-Direction}!Pin@{Pin}}
+\subsubsection[{get\-Direction}]{\setlength{\rightskip}{0pt plus 5cm}{\bf G\-P\-I\-O\-System\-::\-Direction} Pin\-::get\-Direction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classPin_a8ae78028468fec12087c77bee35afe86}
+
+
+Get pin's direction. 
+
+\begin{DoxyReturn}{Returns}
+Current pin's direction. 
+\end{DoxyReturn}
+\hypertarget{classPin_ad34ebe31aed9ca042513d17e4dfadb1a}{\index{Pin@{Pin}!get\-Name@{get\-Name}}
+\index{get\-Name@{get\-Name}!Pin@{Pin}}
+\subsubsection[{get\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Pin\-::get\-Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classPin_ad34ebe31aed9ca042513d17e4dfadb1a}
+
+
+Get pin's name. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classPin}{Pin}'s name. 
+\end{DoxyReturn}
+\hypertarget{classPin_ab8584a7f0107f7b7a525a12074d8fbff}{\index{Pin@{Pin}!get\-Value@{get\-Value}}
+\index{get\-Value@{get\-Value}!Pin@{Pin}}
+\subsubsection[{get\-Value}]{\setlength{\rightskip}{0pt plus 5cm}{\bf G\-P\-I\-O\-System\-::\-Value} Pin\-::get\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classPin_ab8584a7f0107f7b7a525a12074d8fbff}
+
+
+Get pin's value. 
+
+\begin{DoxyReturn}{Returns}
+Current pin's value. 
+\end{DoxyReturn}
+\hypertarget{classPin_a4f2fe29e37c959fa7ec90e395bb73230}{\index{Pin@{Pin}!set\-Direction@{set\-Direction}}
+\index{set\-Direction@{set\-Direction}!Pin@{Pin}}
+\subsubsection[{set\-Direction}]{\setlength{\rightskip}{0pt plus 5cm}void Pin\-::set\-Direction (
+\begin{DoxyParamCaption}
+\item[{{\bf G\-P\-I\-O\-System\-::\-Direction}}]{\-\_\-direction}
+\end{DoxyParamCaption}
+)}}\label{classPin_a4f2fe29e37c959fa7ec90e395bb73230}
+
+
+Set pin's direction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em direction} & \hyperlink{classPin}{Pin}'s direction. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classPin_ab8cea89b887392e27a7964e382fffcc5}{\index{Pin@{Pin}!set\-Value@{set\-Value}}
+\index{set\-Value@{set\-Value}!Pin@{Pin}}
+\subsubsection[{set\-Value}]{\setlength{\rightskip}{0pt plus 5cm}void Pin\-::set\-Value (
+\begin{DoxyParamCaption}
+\item[{{\bf G\-P\-I\-O\-System\-::\-Value}}]{\-\_\-value}
+\end{DoxyParamCaption}
+)}}\label{classPin_ab8cea89b887392e27a7964e382fffcc5}
+
+
+Set pin's value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \hyperlink{classPin}{Pin}'s value. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classPin_ad940005d3eda19065f03f1deb6b469d1}{\index{Pin@{Pin}!name@{name}}
+\index{name@{name}!Pin@{Pin}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Pin\-::name = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classPin_ad940005d3eda19065f03f1deb6b469d1}
+$<$ \hyperlink{classPin}{Pin} name, generally in the form P\mbox{[}8,9\mbox{]}\-\_\-\mbox{[}0-\/9\mbox{]}\mbox{[}0-\/9\mbox{]}\mbox{[}0-\/9\mbox{]}. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/Pin.\-h\item 
+src/Pin.\-cpp\end{DoxyCompactItemize}
